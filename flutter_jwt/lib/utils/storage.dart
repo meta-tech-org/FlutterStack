@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:universal_html/html.dart' show window;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -36,5 +38,16 @@ class Storage {
     else {
       await storage.write(key: key, value: null);
     }
+  }
+
+  String decodeTokenAndStoreUserData(String token){
+    var userData = token.split('.')[1];
+    var tokenJson = ascii.decode(base64.decode(base64.normalize(userData)));
+    var decodedUserDataMap = json.decode(tokenJson);
+    var id = decodedUserDataMap['Id'];
+    var email = decodedUserDataMap['email'];
+
+    write("id", id);
+    write("email", email);
   }
 }

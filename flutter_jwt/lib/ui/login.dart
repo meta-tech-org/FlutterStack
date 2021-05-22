@@ -59,6 +59,7 @@ class LoginPage extends StatelessWidget {
                     var jwt = await attemptLogIn(username, password);
                     if (jwt != null) {
                       storage.write("jwt", jwt);
+                      storage.decodeTokenAndStoreUserData(jwt);
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
