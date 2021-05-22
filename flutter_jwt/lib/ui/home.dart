@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
             route: "WeatherForecast/getAuth",
             onHasDataWidget: (data) => Column(
                   children: <Widget>[
-                    Text("here's the data:"),
+                    Text("Data", style: TextStyle(fontSize: 30.0)),
                     Text(data),
                   ],
                 )),
