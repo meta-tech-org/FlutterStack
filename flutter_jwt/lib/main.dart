@@ -5,12 +5,32 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert' show json, base64, ascii;
 import 'package:universal_html/html.dart' show window;
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:provider/provider.dart';
 
 // Create secure storage for iOS, Android and Linux
 final storage = FlutterSecureStorage();
 
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(create: (_) => UserState(), child: MyApp(),));
+}
+
+class UserState with ChangeNotifier{
+  String jwt;
+  String email;
+  String id;
+
+  Future<String> get jwtOrEmpty async {
+    var jwt = "";
+    if (kIsWeb) {
+      jwt = window.localStorage.containsKey("jwt")
+          ? window.localStorage["jwt"]
+          : "";
+    } else {
+      jwt = await storage.read(key: "jwt");
+    }
+    if (jwt == null) return "";
+    return jwt;
+  }
 }
 
 class MyApp extends StatelessWidget {
