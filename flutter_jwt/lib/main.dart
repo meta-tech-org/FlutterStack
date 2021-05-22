@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Authentication',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blue,
       ),
       home: FutureBuilder(
           future: jwtOrEmpty,
@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
             }
 
             // The token is valid and is not expired
-            return HomePage(str, payload);
+            return HomePage(str);
           }),
     );
   }
