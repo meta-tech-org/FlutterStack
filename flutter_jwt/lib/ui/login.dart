@@ -62,10 +62,10 @@ class LoginPage extends StatelessWidget {
                     var jwt = await attemptLogIn(username, password);
                     if (jwt != null) {
                       storage.write("jwt", jwt);
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomePage.fromBase64(jwt)));
+                              builder: (context) => HomePage()));
                     } else {
                       displayDialog(context, "An Error Occurred",
                           "No account was found matching that username and password");
