@@ -8,6 +8,8 @@ import 'package:universal_html/html.dart' show window;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:provider/provider.dart';
 
+import 'ui/home.dart';
+
 void main() {
   runApp(ChangeNotifierProvider(create: (_) => UserState(), child: MyApp(),));
 }
@@ -41,6 +43,13 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/': (context) => MyApp(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/home': (context) => HomePage(),
+      },
       home: FutureBuilder(
           future: context.watch<UserState>().jwtOrEmpty(),
           builder: (context, snapshot) {
@@ -80,7 +89,7 @@ class _MyAppState extends State<MyApp> {
             }
 
             // The token is valid and is not expired
-            return HomePage(str);
+            return HomePage();
           }),
     );
   }
