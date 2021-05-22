@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jwt/ui/home.dart';
 import 'package:flutter_jwt/ui/login.dart';
 import 'package:flutter_jwt/utils/storage.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert' show json, base64, ascii;
-import 'package:universal_html/html.dart' show window;
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:provider/provider.dart';
 import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 
