@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(title: Text("Secret Data Screen")),
         body: Center(
           child: FutureBuilder(
-              future: http.read(Uri.parse('$SERVER_IP/data'), headers: {"Authorization": jwt}),
+              future: http.read(Uri.parse('$SERVER_IP/WeatherForecast/getAuth'), headers: {"Authorization": "Bearer $jwt"}),
               builder: (context, snapshot) =>
               snapshot.hasData ?
               Column(children: <Widget>[
@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                 Text(snapshot.data, style: Theme.of(context).textTheme.bodyText1)
               ],)
                   :
-              snapshot.hasError ? Text("An error occurred") : CircularProgressIndicator()
+              snapshot.hasError ? Text("An error occurred\n${snapshot.error}\n$jwt") : CircularProgressIndicator()
           ),
         ),
       );
