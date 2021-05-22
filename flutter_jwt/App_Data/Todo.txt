@@ -3,5 +3,9 @@ Fix routing in web (for example when logging out)
 Outsource FutureBuilder
 Make Logout work everywhere
 Add proper login scheme
-Write jwt handling logic
-Add bottom navigation bar
+
+
+
+-------------------------------
+* Add bottom navigation bar
+* Write jwt handling logic
