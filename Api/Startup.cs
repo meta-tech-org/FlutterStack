@@ -1,4 +1,5 @@
 using Api.Configuration;
+using Api.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -60,7 +61,12 @@ namespace Api
                 };
             });
 
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApiDbContext>();
+            services.AddDefaultIdentity<ApiUser>(options =>
+            {
+                //Add signin options
+                options.SignIn.RequireConfirmedAccount = true;
+                //options.Password.RequiredLength = 7;
+            }).AddEntityFrameworkStores<ApiDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
