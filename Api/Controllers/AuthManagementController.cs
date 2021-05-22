@@ -48,6 +48,18 @@ namespace Api.Controllers
                     });
                 }
 
+                if (!user.Email.Contains("@") || !user.Email.Contains("."))
+                {
+                    return BadRequest(new RegistrationResponse()
+                    {
+                        Result = false,
+                        Errors = new List<string>()
+                        {
+                            "Email need to include a '@' and '.'"
+                        }
+                    });
+                }
+
                 var newUser = new ApiUser { Email = user.Email, UserName = user.Email };
                 var isCreated = await _userManager.CreateAsync(newUser, user.Password);
                 if (isCreated.Succeeded)
