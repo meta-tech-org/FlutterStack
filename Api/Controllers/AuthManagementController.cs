@@ -29,7 +29,7 @@ namespace Api.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] UserRegistrationViewModel user)
+        public async Task<IActionResult> Register([FromForm] UserRegistrationViewModel user)
         {
             // Check if the incoming request is valid
             if (ModelState.IsValid)
@@ -80,7 +80,7 @@ namespace Api.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] UserLoginRequest user)
+        public async Task<IActionResult> Login([FromForm] UserLoginRequest user)
         {
             if (ModelState.IsValid)
             {
