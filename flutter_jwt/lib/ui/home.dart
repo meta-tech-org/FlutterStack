@@ -21,15 +21,15 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text("Secret Data Screen")),
-      body: Row(children: [
+      body: Column(children: [
         FutureBuilder(
-            future: http.read(Uri.parse('$SERVER_IP/WeatherForecast/getAuth'), headers: {"Authorization": "Bearer $jwt"}),
+            future: http.read(Uri.parse('$SERVER_IP/WeatherForecast/getAuth'),
+                headers: {"Authorization": "Bearer $jwt"}),
             builder: (context, snapshot) => snapshot.hasData
                 ? Column(
                     children: <Widget>[
-                      Text("${payload['username']}, here's the data:"),
-                      Text(snapshot.data,
-                          style: Theme.of(context).textTheme.bodyText1)
+                      Text("here's the data:"),
+                      Text(snapshot.data),
                     ],
                   )
                 : snapshot.hasError
