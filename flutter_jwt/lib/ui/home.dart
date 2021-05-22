@@ -11,8 +11,7 @@ import 'package:universal_html/html.dart' show window;
 class HomePage extends StatelessWidget {
   HomePage(this.jwt);
 
-  factory HomePage.fromBase64(String jwt) => HomePage(
-      jwt);
+  factory HomePage.fromBase64(String jwt) => HomePage(jwt);
 
   final String jwt;
 
@@ -20,20 +19,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text("Secret Data Screen")),
       body: Column(children: [
-        FutureBuilder(
-            future: http.read(Uri.parse('$SERVER_IP/WeatherForecast/getAuth'),
-                headers: {"Authorization": "Bearer $jwt"}),
-            builder: (context, snapshot) => snapshot.hasData
-                ? Column(
-                    children: <Widget>[
-                      Text("here's the data:"),
-                      Text(snapshot.data),
-                      WebWidget()
-                    ],
-                  )
-                : snapshot.hasError
-                    ? Text("An error occurred")
-                    : CircularProgressIndicator()),
+        WebWidget(
+            route: "WeatherForecast/getAuth",
+            onHasDataWidget: (data) => Column(
+                  children: <Widget>[
+                    Text("here's the data:"),
+                    Text(data),
+                  ],
+                )),
         TextButton(
             onPressed: () {
               if (kIsWeb) {
