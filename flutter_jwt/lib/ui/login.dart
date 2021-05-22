@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jwt/ui/home.dart';
-import 'package:flutter_jwt/ui/main.dart';
-
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_jwt/main.dart';
+import 'package:universal_html/html.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter_jwt/utils/constants.dart';
 
 class LoginPage extends StatelessWidget {
@@ -71,7 +70,14 @@ class LoginPage extends StatelessWidget {
                     var password = _passwordController.text;
                     var jwt = await attemptLogIn(username, password);
                     if(jwt != null) {
-                      storage.write(key: "jwt", value: jwt);
+                      // If Web App: Store in localStorage
+                      if(kIsWeb){
+                        window.localStorage["csrf"] = jwt;
+                      }
+                      // Mobile: Store in SecureStorgae
+                      else{
+                        storage.write(key: "jwt", value: jwt);
+                      }
                       Navigator.push(
                           context,
                           MaterialPageRoute(
