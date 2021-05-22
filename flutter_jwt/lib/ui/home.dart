@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
         TextButton(
             onPressed: () {
               storage.reset("jwt");
-              Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+              Navigator.pushReplacementNamed(context, '/login');
             },
             child: Text("Logout"))
       ]));

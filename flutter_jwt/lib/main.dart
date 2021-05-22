@@ -45,8 +45,7 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: '/',
       routes: {
-        // When navigating to the "/" route, build the FirstScreen widget.
-        '/': (context) => MyApp(),
+        '/login' : (context) => MyApp(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/home': (context) => HomePage(),
       },
