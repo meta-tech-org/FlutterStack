@@ -22,9 +22,9 @@ class LoginPage extends StatelessWidget {
 
   Future<String> attemptLogIn(String username, String password) async {
     var res = await http.post(
-        Uri.parse("$SERVER_IP/login"),
+        Uri.parse("$SERVER_IP/api/AuthManagement/Login"),
         body: {
-          "username": username,
+          "email": username,
           "password": password
         }
     );
@@ -34,9 +34,9 @@ class LoginPage extends StatelessWidget {
 
   Future<int> attemptSignUp(String username, String password) async {
     var res = await http.post(
-        Uri.parse('$SERVER_IP/signup'),
+        Uri.parse('$SERVER_IP/api/AuthManagement/Register'),
         body: {
-          "username": username,
+          "email": username,
           "password": password
         }
     );

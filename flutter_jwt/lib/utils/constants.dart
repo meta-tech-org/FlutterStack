@@ -1,1 +1,1 @@
-const SERVER_IP = 'http://192.168.1.167:5000';
+const SERVER_IP = 'https://localhost:44336';
