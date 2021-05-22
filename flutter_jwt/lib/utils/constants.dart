@@ -1,1 +1,1 @@
-const SERVER_IP = 'https://localhost:44336';
+const SERVER_IP = 'https://flutterapi.meta-tech.org';
