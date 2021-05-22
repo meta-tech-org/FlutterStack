@@ -18,23 +18,23 @@ class Storage {
     return value;
   }
 
-  write(String key, String value) {
+  Future<void> write(String key, String value) async{
     if (kIsWeb) {
       window.localStorage[key] = value;
     }
     // Mobile: Store in SecureStorgae
     else {
-      storage.write(value: value, key: key);
+      await storage.write(value: value, key: key);
     }
   }
 
-  reset(String key) {
+  Future<void> reset(String key) async{
     if (kIsWeb) {
       window.localStorage.remove(key);
     }
     // Mobile: Store in SecureStorage
     else {
-      storage.write(key: key, value: null);
+      await storage.write(key: key, value: null);
     }
   }
 }
