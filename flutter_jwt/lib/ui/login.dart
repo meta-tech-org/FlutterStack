@@ -63,7 +63,7 @@ class LoginPage extends StatelessWidget {
                     if (jwt != null) {
                       // If Web App: Store in localStorage
                       if (kIsWeb) {
-                        window.localStorage["csrf"] = jwt;
+                        window.localStorage["jwt"] = jwt;
                       }
                       // Mobile: Store in SecureStorgae
                       else {

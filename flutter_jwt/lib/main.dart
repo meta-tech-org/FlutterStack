@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
   Future<String> get jwtOrEmpty async {
     var jwt = "";
     if (kIsWeb) {
-      jwt = window.localStorage.containsKey("csrf")
-          ? window.localStorage["csrf"]
+      jwt = window.localStorage.containsKey("jwt")
+          ? window.localStorage["jwt"]
           : "";
     } else {
       jwt = await storage.read(key: "jwt");
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.data == "") {
               // Remove existing key from localStorage
               if(kIsWeb){
-                window.localStorage.remove("csrf");
+                window.localStorage.remove("jwt");
               }
               return LoginPage();
             }
@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
             if (jwt.length != 3) {
               // Remove existing 'wrong' key from localStorage
               if(kIsWeb){
-                window.localStorage.remove("csrf");
+                window.localStorage.remove("jwt");
               }
               return LoginPage();
             }
@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
                 .isBefore(DateTime.now())) {
               // Remove existing old key from localStorage
               if(kIsWeb){
-                window.localStorage.remove("csrf");
+                window.localStorage.remove("jwt");
               }
               return LoginPage();
             }

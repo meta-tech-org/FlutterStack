@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
         TextButton(
             onPressed: () {
               if (kIsWeb) {
-                window.localStorage.remove("csrf");
+                window.localStorage.remove("jwt");
               }
               // Mobile: Store in SecureStorage
               else {
