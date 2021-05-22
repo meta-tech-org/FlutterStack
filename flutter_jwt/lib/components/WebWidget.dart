@@ -3,30 +3,27 @@ import 'package:flutter_jwt/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
 class WebWidget extends StatefulWidget {
-  const WebWidget({Key key, this.builder}) : super(key: key);
-
-  final AsyncWidgetBuilder builder;
+  final Widget Function(dynamic) onHasDataWidget;
+  final String route;
+  const WebWidget({Key key, this.route, this.onHasDataWidget}) : super(key: key);
 
   @override
-  _WebWidgetState createState() => _WebWidgetState();
+  _WebWidgetState createState() => _WebWidgetState(route, onHasDataWidget);
 }
 
 class _WebWidgetState extends State<WebWidget> {
+  final String route;
+  final Widget Function(dynamic) onHasDataWidget;
 
-  Widget test(String data) {
-    return Column(children: <Widget>[
-      Text("here's the data:"),
-      Text(data),
-    ]);
-  }
+  _WebWidgetState(this.route, this.onHasDataWidget);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: http.read(Uri.parse('$SERVER_IP/WeatherForecast/getAuth'),
+        future: http.read(Uri.parse('$SERVER_IP/$route'),
             headers: {"Authorization": "Bearer JWT"}),
         builder: (context, snapshot) => snapshot.hasData
-            ? test(snapshot.data)
+            ? onHasDataWidget(snapshot.data)
             : snapshot.hasError
                 ? Text("An error occurred")
                 : CircularProgressIndicator());
