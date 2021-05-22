@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jwt/ui/home.dart';
 import 'package:flutter_jwt/main.dart';
-import 'package:universal_html/html.dart';
+import 'package:universal_html/html.dart' show window;
 import 'package:http/http.dart' as http;
 import 'package:flutter_jwt/utils/constants.dart';
 
