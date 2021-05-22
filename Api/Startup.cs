@@ -64,7 +64,7 @@ namespace Api
 
             services.AddDbContext<ApiDbContext>(options =>
                 options
-                //.UseLazyLoadingProxies()
+                .UseLazyLoadingProxies()
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<ApiUser>(options =>
