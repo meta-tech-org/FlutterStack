@@ -15,13 +15,13 @@ void main() {
 final Storage storage = Storage();
 
 class UserState with ChangeNotifier{
-  Future<String> get jwtOrEmpty async {
+  Future<String> jwtOrEmpty() async {
     return storage.read("jwt");
   }
-  Future<String> get emailOrEmpty async {
+  Future<String> emailOrEmpty() async {
     return storage.read("email");
   }
-  Future<String> get idOrEmpty async {
+  Future<String> idOrEmpty() async {
     return storage.read("id");
   }
 }
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: FutureBuilder(
-          future: context.watch<UserState>().jwtOrEmpty,
+          future: context.watch<UserState>().jwtOrEmpty(),
           builder: (context, snapshot) {
             // Check snapshot is data is existing
             // If snapshot has not data, the async data call is not finished yet
@@ -47,9 +47,7 @@ class MyApp extends StatelessWidget {
             //  The async data call return no JWT data
             if (snapshot.data == "") {
               // Remove existing key from localStorage
-              if(kIsWeb){
-                window.localStorage.remove("jwt");
-              }
+              storage.reset("jwt");
               return LoginPage();
             }
 
@@ -61,9 +59,7 @@ class MyApp extends StatelessWidget {
             // Normally the JWT is a Base64 encoded string separated by three '.'
             if (jwt.length != 3) {
               // Remove existing 'wrong' key from localStorage
-              if(kIsWeb){
-                window.localStorage.remove("jwt");
-              }
+              storage.reset("jwt");
               return LoginPage();
             }
 
@@ -75,9 +71,7 @@ class MyApp extends StatelessWidget {
             if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000)
                 .isBefore(DateTime.now())) {
               // Remove existing old key from localStorage
-              if(kIsWeb){
-                window.localStorage.remove("jwt");
-              }
+              storage.reset("jwt");
               return LoginPage();
             }
 

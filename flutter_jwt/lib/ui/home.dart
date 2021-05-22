@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
         TextButton(
             onPressed: () {
               storage.reset("jwt");
-              Navigator.popUntil(context, ModalRoute.withName('/'));
+              Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
             },
             child: Text("Logout"))
       ]));

@@ -25,7 +25,7 @@ class _WebWidgetState extends State<WebWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: context.watch<UserState>().jwtOrEmpty.then((jwt) => http.read(
+        future: context.watch<UserState>().jwtOrEmpty().then((jwt) => http.read(
             Uri.parse('$SERVER_IP/$route'),
             headers: {"Authorization": "Bearer $jwt"})),
         builder: (context, snapshot) => snapshot.hasData
