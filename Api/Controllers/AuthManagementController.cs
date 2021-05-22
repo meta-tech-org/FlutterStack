@@ -1,7 +1,6 @@
 ﻿using Api.Configuration;
 using Api.Data;
 using Api.Domain;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -16,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
-    [Microsoft.AspNetCore.Components.Route("api/[controller]")] // api/authmanagement
+    [Route("api/[controller]")] // api/authmanagement
     [ApiController]
     public class AuthManagementController : ControllerBase
     {
