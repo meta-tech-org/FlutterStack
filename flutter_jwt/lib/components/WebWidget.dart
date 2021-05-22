@@ -25,13 +25,13 @@ class _WebWidgetState extends State<WebWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: http.read(Uri.parse('$SERVER_IP/$route'), headers: {
-          "Authorization": "Bearer ${context.watch<UserState>().jwtOrEmpty}"
-        }),
+        future: context.watch<UserState>().jwtOrEmpty.then((jwt) => http.read(
+            Uri.parse('$SERVER_IP/$route'),
+            headers: {"Authorization": "Bearer $jwt"})),
         builder: (context, snapshot) => snapshot.hasData
             ? onHasDataWidget(snapshot.data)
             : snapshot.hasError
-                ? Text("An error occurred")
+                ? Text("An error occurred:\n${snapshot.error}")
                 : CircularProgressIndicator());
   }
 }

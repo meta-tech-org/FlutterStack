@@ -29,13 +29,7 @@ class HomePage extends StatelessWidget {
                 )),
         TextButton(
             onPressed: () {
-              if (kIsWeb) {
-                window.localStorage.remove("jwt");
-              }
-              // Mobile: Store in SecureStorage
-              else {
-                storage.write(key: "jwt", value: null);
-              }
+              storage.reset("jwt");
               Navigator.popUntil(context, ModalRoute.withName('/'));
             },
             child: Text("Logout"))

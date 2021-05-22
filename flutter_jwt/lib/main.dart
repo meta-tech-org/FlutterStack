@@ -1,53 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jwt/ui/home.dart';
 import 'package:flutter_jwt/ui/login.dart';
+import 'package:flutter_jwt/utils/storage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert' show json, base64, ascii;
 import 'package:universal_html/html.dart' show window;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:provider/provider.dart';
 
-// Create secure storage for iOS, Android and Linux
-final storage = FlutterSecureStorage();
-
 void main() {
   runApp(ChangeNotifierProvider(create: (_) => UserState(), child: MyApp(),));
 }
 
-class UserState with ChangeNotifier{
-  String jwt;
-  String email;
-  String id;
+final Storage storage = Storage();
 
+class UserState with ChangeNotifier{
   Future<String> get jwtOrEmpty async {
-    var jwt = "";
-    if (kIsWeb) {
-      jwt = window.localStorage.containsKey("jwt")
-          ? window.localStorage["jwt"]
-          : "";
-    } else {
-      jwt = await storage.read(key: "jwt");
-    }
-    if (jwt == null) return "";
-    return jwt;
+    return storage.read("jwt");
+  }
+  Future<String> get emailOrEmpty async {
+    return storage.read("email");
+  }
+  Future<String> get idOrEmpty async {
+    return storage.read("id");
   }
 }
 
 class MyApp extends StatelessWidget {
   // Read JWT from storage (secure/local)
   // Return JWT or empty string if not existing
-  Future<String> get jwtOrEmpty async {
-    var jwt = "";
-    if (kIsWeb) {
-      jwt = window.localStorage.containsKey("jwt")
-          ? window.localStorage["jwt"]
-          : "";
-    } else {
-      jwt = await storage.read(key: "jwt");
-    }
-    if (jwt == null) return "";
-    return jwt;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +38,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: FutureBuilder(
-          future: jwtOrEmpty,
+          future: context.watch<UserState>().jwtOrEmpty,
           builder: (context, snapshot) {
             // Check snapshot is data is existing
             // If snapshot has not data, the async data call is not finished yet

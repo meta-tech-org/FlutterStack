@@ -61,14 +61,7 @@ class LoginPage extends StatelessWidget {
                     var password = "Test1234!";//_passwordController.text;
                     var jwt = await attemptLogIn(username, password);
                     if (jwt != null) {
-                      // If Web App: Store in localStorage
-                      if (kIsWeb) {
-                        window.localStorage["jwt"] = jwt;
-                      }
-                      // Mobile: Store in SecureStorgae
-                      else {
-                        storage.write(key: "jwt", value: jwt);
-                      }
+                      storage.write("jwt", jwt);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
