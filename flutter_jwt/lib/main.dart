@@ -3,7 +3,7 @@ import 'package:flutter_jwt/ui/home.dart';
 import 'package:flutter_jwt/ui/login.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert' show json, base64, ascii;
-import 'package:universal_html/html.dart';
+import 'package:universal_html/html.dart' show window;
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 // Create secure storage for iOS, Android and Linux
