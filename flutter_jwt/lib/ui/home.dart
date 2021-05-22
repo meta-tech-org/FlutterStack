@@ -9,9 +9,6 @@ import 'package:flutter_jwt/utils/constants.dart';
 import 'package:universal_html/html.dart' show window;
 
 class HomePage extends StatelessWidget {
-  HomePage();
-
-  factory HomePage.fromBase64(String jwt) => HomePage();
 
   @override
   Widget build(BuildContext context) => Scaffold(
