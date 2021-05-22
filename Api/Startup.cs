@@ -33,6 +33,7 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -84,6 +85,8 @@ namespace Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
             }
+            app.UseCors(builder =>
+                builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
 
             app.UseHttpsRedirection();
 
