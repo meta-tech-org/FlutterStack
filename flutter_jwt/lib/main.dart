@@ -7,10 +7,12 @@ import 'dart:convert' show json, base64, ascii;
 import 'package:universal_html/html.dart' show window;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:provider/provider.dart';
+import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 
 import 'ui/home.dart';
 
 void main() {
+  configureApp();
   runApp(ChangeNotifierProvider(create: (_) => UserState(), child: MyApp(),));
 }
 
