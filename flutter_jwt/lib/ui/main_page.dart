@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_jwt/components/WebWidget.dart';
 import 'package:flutter_jwt/ui/account.dart';
+
+import 'home.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key key, this.title}) : super(key: key);
@@ -24,15 +25,8 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: Text("My Home Screen")),
         body: IndexedStack(children: [
-          WebWidget(
-              route: "WeatherForecast/getAuth",
-              onHasDataWidget: (data) => Column(
-                    children: <Widget>[
-                      Text("Data", style: TextStyle(fontSize: 30.0)),
-                      Text(data),
-                    ],
-                  )),
-          AccountPage()
+          Home(),
+          AccountPage(),
         ], index: _currentIndex),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
