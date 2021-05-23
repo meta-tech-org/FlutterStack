@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jwt/main.dart';
-import 'package:flutter_jwt/ui/home.dart';
+import 'package:flutter_jwt/ui/main_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_jwt/utils/constants.dart';
 
@@ -63,7 +63,7 @@ class LoginPage extends StatelessWidget {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomePage()));
+                              builder: (context) => MainPage()));
                     } else {
                       displayDialog(context, "An Error Occurred",
                           "No account was found matching that username and password");

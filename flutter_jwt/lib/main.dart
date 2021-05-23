@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_jwt/ui/home.dart';
+import 'package:flutter_jwt/ui/main_page.dart';
 import 'package:flutter_jwt/ui/login.dart';
 import 'package:flutter_jwt/utils/storage.dart';
 import 'dart:convert' show json, base64, ascii;
 import 'package:provider/provider.dart';
 import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
-
-import 'ui/home.dart';
 
 void main() {
   configureApp();
@@ -46,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/login' : (context) => MyApp(),
         // When navigating to the "/second" route, build the SecondScreen widget.
-        '/home': (context) => HomePage(),
+        '/main': (context) => MainPage(),
       },
       home: FutureBuilder(
           future: context.watch<UserState>().jwtOrEmpty(),
@@ -87,7 +85,7 @@ class _MyAppState extends State<MyApp> {
             }
 
             // The token is valid and is not expired
-            return HomePage();
+            return MainPage();
           }),
     );
   }

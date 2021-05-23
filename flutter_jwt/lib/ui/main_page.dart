@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jwt/components/WebWidget.dart';
 import 'package:flutter_jwt/ui/account.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+class MainPage extends StatefulWidget {
+  MainPage({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
   void onTabTapped(int index) {
